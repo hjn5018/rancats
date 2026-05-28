@@ -81,3 +81,26 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Staggered walking paw animation on hover */
+@keyframes pawWalk {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-6px) scale(1.15);
+  }
+}
+
+.group:hover .paw-walk-1 {
+  animation: pawWalk 0.9s ease-in-out infinite;
+}
+.group:hover .paw-walk-2 {
+  animation: pawWalk 0.9s ease-in-out infinite;
+  animation-delay: 0.15s;
+}
+.group:hover .paw-walk-3 {
+  animation: pawWalk 0.9s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+

@@ -24,13 +24,9 @@ export default function Likes() {
   }
 
   return (
-    <main className="flex-grow pt-24 pb-32 md:pb-lg px-margin-mobile max-w-7xl mx-auto w-full">
+    <main className="flex-grow pt-24 pb-lg px-margin-mobile max-w-7xl mx-auto w-full">
       {/* Page Header */}
       <div className="mb-xl flex items-center justify-between">
-        <h1 className="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary flex items-center gap-2">
-          <span className="material-symbols-outlined text-secondary-container" style={{ fontVariationSettings: "'FILL' 1", fontSize: '32px' }}>favorite</span>
-          나의 최애 고양이들
-        </h1>
         <span className="bg-primary-container/10 text-primary font-label-md text-label-md px-4 py-1 rounded-full">
           {likedCats.length} Cats
         </span>
@@ -38,7 +34,7 @@ export default function Likes() {
 
       {likedCats.length > 0 ? (
         /* Cat Image Grid (Populated State) */
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-gutter space-y-gutter w-full" id="cat-grid">
+        <div className="columns-3 gap-gutter space-y-gutter w-full" id="cat-grid">
           {likedCats.map((cat) => (
             <div 
               key={cat.id}
@@ -48,11 +44,11 @@ export default function Likes() {
               <img 
                 className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105" 
                 src={cat.url}
-                alt={cat.info.breedName}
+                alt={cat.breeds?.[0]?.name || cat.info?.breedName || "고양이"}
               />
               {/* Heart Icon (Liked State) */}
               <button 
-                className="absolute bottom-4 right-4 bg-surface/85 backdrop-blur-md p-2 rounded-full text-secondary-container shadow-sm hover:scale-110 active:scale-90 transition-all duration-200 z-10 group-hover:bg-white flex items-center justify-center"
+                className="absolute bottom-4 right-4 w-11 h-11 flex items-center justify-center bg-surface/85 backdrop-blur-md rounded-full text-secondary-container shadow-sm hover:scale-110 active:scale-90 transition-all duration-200 z-10 group-hover:bg-white"
                 onClick={(e) => removeLike(e, cat.id)}
                 aria-label="좋아요 삭제"
               >
@@ -61,7 +57,7 @@ export default function Likes() {
               {/* Tags (Optional overlay on hover) */}
               <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex gap-2">
                 <span className="bg-surface-container-highest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-3 py-1 rounded-full">
-                  {cat.info.breedName}
+                  {cat.breeds?.[0]?.name || cat.info?.breedName || "품종 정보 없음"}
                 </span>
               </div>
             </div>
@@ -74,16 +70,6 @@ export default function Likes() {
             <span className="material-symbols-outlined text-primary text-[64px]" style={{ fontVariationSettings: "'FILL' 1" }}>pets</span>
           </div>
           <h2 className="font-headline-md text-headline-md text-on-surface mb-2">아직 좋아요한 고양이가 없어요</h2>
-          <p className="font-body-md text-body-md text-on-surface-variant mb-8 max-w-sm">
-            마음에 드는 고양이 사진에 하트를 눌러 나만의 갤러리를 만들어보세요!
-          </p>
-          <button 
-            className="bg-primary-container text-on-primary-container font-headline-md text-headline-md px-8 py-4 rounded-full shadow-md hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2"
-            onClick={() => navigate('/')}
-          >
-            <span className="material-symbols-outlined">home</span>
-            홈으로 가기
-          </button>
         </div>
       )}
     </main>
