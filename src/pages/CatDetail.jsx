@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
+import LoadingSpinner from '../components/LoadingSpinner'
+import EmptyState from '../components/EmptyState'
+import BreedStatCard from '../components/BreedStatCard'
 
 export default function CatDetail() {
   const { id } = useParams()
@@ -77,20 +80,17 @@ export default function CatDetail() {
 
 
   if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <span className="material-symbols-outlined text-primary text-4xl paw-spinner" style={{ fontSize: '48px' }}>pets</span>
-        <p className="mt-4 font-label-md text-label-md text-primary font-bold">상세 정보 로딩 중...</p>
-      </div>
-    )
+    return <LoadingSpinner message="상세 정보 로딩 중..." className="min-h-[60vh]" />
   }
 
   if (!cat) {
     return (
-      <div className="text-center py-20">
-        <h2 className="font-headline-md text-headline-md text-on-surface">고양이 정보를 찾을 수 없습니다.</h2>
-        <button onClick={() => navigate('/')} className="mt-4 bg-primary text-white px-6 py-2 rounded-lg"> 홈으로 이동 </button>
-      </div>
+      <EmptyState 
+        icon="error"
+        title="고양이 정보를 찾을 수 없습니다."
+        buttonText="홈으로 이동"
+        onButtonClick={() => navigate('/')}
+      />
     )
   }
 
@@ -173,16 +173,16 @@ export default function CatDetail() {
 
           {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="p-5 bg-surface-container-lowest rounded-xl shadow-[0_4px_10px_-2px_rgba(0,0,0,0.02)] border border-outline-variant/30 flex flex-col items-center justify-center text-center gap-1 hover:-translate-y-1 transition-transform">
-              <span className="material-symbols-outlined text-outline text-2xl mb-1">hourglass_empty</span>
-              <p className="font-label-sm text-label-sm text-on-surface-variant">수명</p>
-              <p className="font-headline-md text-headline-md text-on-surface">{breed?.life_span ? `${breed.life_span} yrs` : "정보 없음"}</p>
-            </div>
-            <div className="p-5 bg-surface-container-lowest rounded-xl shadow-[0_4px_10px_-2px_rgba(0,0,0,0.02)] border border-outline-variant/30 flex flex-col items-center justify-center text-center gap-1 hover:-translate-y-1 transition-transform">
-              <span className="material-symbols-outlined text-outline text-2xl mb-1">monitor_weight</span>
-              <p className="font-label-sm text-label-sm text-on-surface-variant">몸무게</p>
-              <p className="font-headline-md text-headline-md text-on-surface">{breed?.weight?.imperial ? `${breed.weight.imperial} lbs` : "정보 없음"}</p>
-            </div>
+            <BreedStatCard 
+              icon="hourglass_empty"
+              label="수명"
+              value={breed?.life_span ? `${breed.life_span} yrs` : "정보 없음"}
+            />
+            <BreedStatCard 
+              icon="monitor_weight"
+              label="몸무게"
+              value={breed?.weight?.imperial ? `${breed.weight.imperial} lbs` : "정보 없음"}
+            />
           </div>
 
           <hr className="border-outline-variant/30 my-2" />
