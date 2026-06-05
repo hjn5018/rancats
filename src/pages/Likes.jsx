@@ -35,12 +35,11 @@ export default function Likes() {
 
       {likedCats.length > 0 ? (
         /* Cat Image Grid (Populated State) */
-        <div className="columns-3 gap-gutter space-y-gutter w-full" id="cat-grid">
+        <div className="grid grid-cols-3 gap-lg" id="cat-grid">
           {likedCats.map((cat) => (
             <CatCard
               key={cat.id}
               cat={cat}
-              variant="masonry"
               isLiked={true}
               onHeartClick={removeLike}
             />
