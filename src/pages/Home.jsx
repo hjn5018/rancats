@@ -113,7 +113,7 @@ export default function Home() {
               <div className="p-md flex justify-between items-center">
                 <div>
                   <h2 className="font-headline-md text-headline-md text-on-surface">{cat.breeds?.[0]?.name || "이름 정보 없음"}</h2>
-                  <p className="font-body-md text-body-md text-on-surface-variant">{cat.breeds?.[0]?.name || "품종 정보 없음"}</p>
+                  <p className="font-body-md text-body-md text-on-surface-variant">{cat.breeds?.[0]?.origin || "원산지 정보 없음"}</p>
                 </div>
                 <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center transition-all duration-300 group-hover:bg-primary group-hover:text-white">
                   <span className="material-symbols-outlined text-[20px]">ads_click</span>
