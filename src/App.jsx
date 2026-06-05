@@ -15,12 +15,15 @@ function App() {
 
   const handleSearchClick = () => {
     if (searchInputRef.current) {
-      searchInputRef.current.focus()
-      // Optional focus flash animation
-      searchInputRef.current.animate([
-        { backgroundColor: 'rgba(255, 135, 135, 0.15)' },
-        { backgroundColor: 'transparent' }
-      ], { duration: 500, easing: 'ease-out' })
+      const query = searchInputRef.current.value.trim();
+      if (!query) {
+        searchInputRef.current.focus()
+        // Optional focus flash animation
+        searchInputRef.current.animate([
+          { backgroundColor: 'rgba(255, 135, 135, 0.15)' },
+          { backgroundColor: 'transparent' }
+        ], { duration: 500, easing: 'ease-out' })
+      }
     }
   }
 
